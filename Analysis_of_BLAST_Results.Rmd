@@ -20,13 +20,26 @@ This study therefore, represents the ability to use bioinformatically-derived da
 
 ## Preliminary Bacterial Stability Study
 
-To confirm whether it was even possible to identify an individual through their own unique bacterial "fingerprint", it was necessary to first verify that the residual bacterial communities left on objects maintained their compositional and structural integrity. What is meant by this is that the researchers needed to validate that all the bacteria present at the time of sampling remained alive and present in a normal environment that consistently can vary in temperature, UV exposure, humidty, and other variables. This was accomplished by swabbing skin surfaces of individuals with dry cotton swabs and separating the samples by immediately placing one sample at -20 degrees celsius and leaving the other sample on an open benchtop at around ambient temperature. Once the results were verified to remain essentially equivalent   
+To confirm whether it was even possible to identify an individual through their own unique bacterial "fingerprint", it was necessary to first verify that the residual bacterial communities left on objects maintained their compositional and structural integrity. What is meant by this is that the researchers needed to validate that all the bacteria present at the time of sampling remained alive and present in a normal environment that consistently can vary in temperature, UV exposure, humidty, and other variables. This was accomplished by swabbing skin surfaces of individuals with dry cotton swabs and separating the samples by immediately placing one sample at -20 degrees celsius and leaving the other sample on an open benchtop at around ambient temperature. Once the results were verified to remain essentially equivalent (the bacterial composition did not change significantly), the researchers were able to proceed with their investigation.
 
-Add about a paragraph here.
+## Sampling
+
+### Keyboards
+
+Keyboards of 25-30 keys per keyboard were swabbed along with the ventral surface of the distal joint of the fingertips of the keyboard owners or main users. When swabbing of the keyboards occurred, the keyboards had not been used in at least 30 min and all sampling was completed within 10 minutes of the first sample. All participants were between 20-35 years of age with no record of antibiotic use in the last six months.
+
+Space bars from keyboards from the general populous were also swabbed for general comparison. All samples were stored at -80 degrees celsius for one week before DNA extraction.
+
+### Computer Mice
+
+The entire surface of the mouse as well as the entire palm of the participants was swabbed as described above taking into account that it had been less than 12 hrs between the last use of the computer mouse. The participants were in the same age range as the ones in the keyboard and the samples were handled in the exact same manner before DNA extraction.
+
 
 ## Computational
 
-And another paragraph or two here.
+#### Keyboard Analysis
+
+Pairwise unweighted and weighted distances were calculated on matches between the bacterial communities on the keyboards and the owners of the keyboards to assess the difference in using bacterial composition or colonial structure to identify an individual. The UniFrac algorithm was used to calculate the weighted distances and,"... Uses the degree of phylogenetic overlap between any pair of communities with points that are close together representing samples with similar bacterial communities."
 
 # Results
 
@@ -142,7 +155,11 @@ joined_blast_data_metadata %>%
   hist(main = "Percent Identity",
        xlab = "Percent")
 ```
-
+joined_blast_data_metadata %>%
+  filter(age_s == "25") %>%
+  pull(pident) %>%
+  hist(main = "Percent Identity",
+       xlab = "Percent")
 Don't forget to report what your figures show in words, here in the Results section.
 
 ```{r summary-table}
