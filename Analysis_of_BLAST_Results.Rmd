@@ -30,6 +30,7 @@ And another paragraph or two here.
 library("dplyr")
 library("tidyr")
 library("knitr")
+library("ggplot2")
 ```
 
 ```{r make-read-in-data-function}
@@ -86,9 +87,6 @@ files_to_read_in <- list.files(path = "output/blast",
 
 # We need to create an empty matrix with the right number of columns
 # so that we can rbind() each dataset on to it
-joined_blast_data <- matrix(nrow = 0,
-                            ncol = 14)
-
 # now we loop over each of the files in the list and append them
 # to the bottom of the 'joined_blast_data' object
 # we do this with the rbind() function and the function we
