@@ -9,7 +9,7 @@ output: github_document
 ## Background
 
 The purpose of the study, Fierer et al. (2010) was to investigate a bioinformatically-enriched method to forensically identify indiviuals through their unique skin-associated bacterial colonies. 
-The study aimed to address the ability to identify individuals based on compendial bacterial communities derived from surfaces (computer mice) touched or owned by these individuals, and assessing whether the phylogenetic similarites between an individual's property (their mouse), and their hands was significant enough to establish a correlational identification of that individual to their property.
+The study aimed to address the ability to identify individuals based on compendial bacterial communities derived from surfaces (computer mice and/or keyboards) touched or owned by these individuals, and assessing whether the phylogenetic similarites between an individual's property (their mouse/keyboards), and their hands was significant enough to establish a correlational identification of that individual to their property.
 
 The criteria developed to establish such correlations included both the composition and the structure of the bacterial "fingerprint" colonies, as well as comparing an individual's bacterial fingerprint colonies to that of the general population and objects that the indiviudal had not come into contact with.
 
@@ -18,7 +18,9 @@ This study therefore, represents the ability to use bioinformatically-derived da
 
 # Methods
 
-## Sample origin and sequencing
+## Preliminary Bacterial Stability Study
+
+To confirm whether it was even possible to identify an individual through their own unique bacterial "fingerprint", it was necessary to first verify that the residual bacterial communities left on objects maintained their compositional and structural integrity. What is meant by this is that the researchers needed to validate that all the bacteria present at the time of sampling remained alive and present in a normal environment that consistently can vary in temperature, UV exposure, humidty, and other variables. This was accomplished by swabbing skin surfaces of individuals with dry cotton swabs and separating the samples by immediately placing one sample at -20 degrees celsius and leaving the other sample on an open benchtop at around ambient temperature. Once the results were verified to remain essentially equivalent   
 
 Add about a paragraph here.
 
