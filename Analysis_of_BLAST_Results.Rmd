@@ -1,13 +1,20 @@
 ---
 title: "Analysis of BLAST Results"
-author: "Don Francisco"
-date: "October 6, 2017"
+author: "Alfredo H. Locht halocht@gmail.com ahlocht@dons.usfca.edu"
+date: "18Oct2017"
 output: github_document
 ---
 
 # Introduction
+## Background
 
-Add 1-2 paragraphs here.
+The purpose of the study, Fierer et al. (2010) was to investigate a bioinformatically-enriched method to forensically identify indiviuals through their unique skin-associated bacterial colonies. 
+The study aimed to address the ability to identify individuals based on compendial bacterial communities derived from surfaces (computer mice) touched or owned by these individuals, and assessing whether the phylogenetic similarites between an individual's property (their mouse), and their hands was significant enough to establish a correlational identification of that individual to their property.
+
+The criteria developed to establish such correlations included both the composition and the structure of the bacterial "fingerprint" colonies, as well as comparing an individual's bacterial fingerprint colonies to that of the general population and objects that the indiviudal had not come into contact with.
+
+This study therefore, represents the ability to use bioinformatically-derived data to supplement or replace current forensic technqiues to not only identify individuals, but also realize that we have now entered an era where complete anonymity is no longer possible.
+
 
 # Methods
 
@@ -31,6 +38,8 @@ library("dplyr")
 library("tidyr")
 library("knitr")
 library("ggplot2")
+install.packages("devtools")
+devtools::install_github("jimhester/lintr")
 ```
 
 ```{r make-read-in-data-function}
