@@ -53,8 +53,7 @@ library("dplyr")
 library("tidyr")
 library("knitr")
 library("ggplot2")
-install.packages("devtools")
-devtools::install_github("jimhester/lintr")
+
 ```
 
 ```{r make-read-in-data-function}
@@ -111,6 +110,8 @@ files_to_read_in <- list.files(path = "output/blast",
 
 # We need to create an empty matrix with the right number of columns
 # so that we can rbind() each dataset on to it
+joined_blast_data <- matrix(nrow = 0,
+                           ncol = 14)
 # now we loop over each of the files in the list and append them
 # to the bottom of the 'joined_blast_data' object
 # we do this with the rbind() function and the function we
@@ -119,6 +120,7 @@ for (filename in files_to_read_in) {
   joined_blast_data <- rbind(joined_blast_data,
                              read_blast_output(filename))
 }
+
 ```
 
 ```{r read-in-metadata-and-join}
@@ -155,12 +157,33 @@ joined_blast_data_metadata %>%
   hist(main = "Percent Identity",
        xlab = "Percent")
 ```
+
+
+
+
+``` {Figures Created by me}
+
+# These are all of the figures created by me for the assignment. They focus on percent identity match across sexes (male, female and not applicable). 
 joined_blast_data_metadata %>%
-  filter(age_s == "25") %>%
+  filter(sex_s == "female") %>%
   pull(pident) %>%
-  hist(main = "Percent Identity",
-       xlab = "Percent")
-Don't forget to report what your figures show in words, here in the Results section.
+  hist(main = "Percent Identity in Females",
+       xlab = "Percent Match")
+       
+joined_blast_data_metadata %>%
+  filter(sex_s == "male") %>%
+  pull(pident) %>%
+  hist(main = "Percent Identity in Males",
+       xlab = "Percent Match")
+       
+joined_blast_data_metadata %>%
+  filter(sex_s == "Not applicable") %>%
+  pull(pident) %>%
+  hist(main = "Percent Identity in Non-Applicable Gender",
+       xlab = "Percent Match")
+
+```
+
 
 ```{r summary-table}
 # Finally, we'd like to be able to make a summary table of the counts of
@@ -170,6 +193,8 @@ Don't forget to report what your figures show in words, here in the Results sect
 kable(table(joined_blast_data_metadata$sscinames,
             joined_blast_data_metadata$Run_s))
 ```
+
+
 
 # Discussion
 
