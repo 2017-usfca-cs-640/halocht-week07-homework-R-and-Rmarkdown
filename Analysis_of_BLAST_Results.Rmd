@@ -1,23 +1,45 @@
 ---
 title: "Analysis of BLAST Results"
-author: "Don Francisco"
-date: "October 6, 2017"
+author: "Alfredo H. Locht halocht@gmail.com ahlocht@dons.usfca.edu"
+date: "18Oct2017"
 output: github_document
 ---
 
 # Introduction
+## Background
 
-Add 1-2 paragraphs here.
+The purpose of the study, Fierer et al. (2010) was to investigate a bioinformatically-enriched method to forensically identify indiviuals through their unique skin-associated bacterial colonies. 
+The study aimed to address the ability to identify individuals based on compendial bacterial communities derived from surfaces (computer mice and/or keyboards) touched or owned by these individuals, and assessing whether the phylogenetic similarites between an individual's property (their mouse/keyboards), and their hands was significant enough to establish a correlational identification of that individual to their property.
+
+The criteria developed to establish such correlations included both the composition and the structure of the bacterial "fingerprint" colonies, as well as comparing an individual's bacterial fingerprint colonies to that of the general population and objects that the indiviudal had not come into contact with.
+
+This study therefore, represents the ability to use bioinformatically-derived data to supplement or replace current forensic technqiues to not only identify individuals, but also realize that we have now entered an era where complete anonymity is no longer possible.
+
 
 # Methods
 
-## Sample origin and sequencing
+## Preliminary Bacterial Stability Study
 
-Add about a paragraph here.
+To confirm whether it was even possible to identify an individual through their own unique bacterial "fingerprint", it was necessary to first verify that the residual bacterial communities left on objects maintained their compositional and structural integrity. What is meant by this is that the researchers needed to validate that all the bacteria present at the time of sampling remained alive and present in a normal environment that consistently can vary in temperature, UV exposure, humidty, and other variables. This was accomplished by swabbing skin surfaces of individuals with dry cotton swabs and separating the samples by immediately placing one sample at -20 degrees celsius and leaving the other sample on an open benchtop at around ambient temperature. Once the results were verified to remain essentially equivalent (the bacterial composition did not change significantly), the researchers were able to proceed with their investigation.
+
+## Sampling
+
+### Keyboards
+
+Keyboards of 25-30 keys per keyboard were swabbed along with the ventral surface of the distal joint of the fingertips of the keyboard owners or main users. When swabbing of the keyboards occurred, the keyboards had not been used in at least 30 min and all sampling was completed within 10 minutes of the first sample. All participants were between 20-35 years of age with no record of antibiotic use in the last six months.
+
+Space bars from keyboards from the general populous were also swabbed for general comparison. All samples were stored at -80 degrees celsius for one week before DNA extraction.
+
+### Computer Mice
+
+The entire surface of the mouse as well as the entire palm of the participants was swabbed as described above taking into account that it had been less than 12 hrs between the last use of the computer mouse. The participants were in the same age range as the ones in the keyboard and the samples were handled in the exact same manner before DNA extraction.
+
 
 ## Computational
 
-And another paragraph or two here.
+#### Keyboard Analysis
+
+Pairwise unweighted and weighted distances were calculated on matches between the bacterial communities on the keyboards and the owners of the keyboards to assess the difference in using bacterial composition or colonial structure to identify an individual. The UniFrac algorithm was used to calculate the weighted distances and,"... Uses the degree of phylogenetic overlap between any pair of communities with points that are close together representing samples with similar bacterial communities."
 
 # Results
 
@@ -30,6 +52,8 @@ And another paragraph or two here.
 library("dplyr")
 library("tidyr")
 library("knitr")
+library("ggplot2")
+
 ```
 
 ```{r make-read-in-data-function}
@@ -87,8 +111,7 @@ files_to_read_in <- list.files(path = "output/blast",
 # We need to create an empty matrix with the right number of columns
 # so that we can rbind() each dataset on to it
 joined_blast_data <- matrix(nrow = 0,
-                            ncol = 14)
-
+                           ncol = 14)
 # now we loop over each of the files in the list and append them
 # to the bottom of the 'joined_blast_data' object
 # we do this with the rbind() function and the function we
@@ -97,6 +120,7 @@ for (filename in files_to_read_in) {
   joined_blast_data <- rbind(joined_blast_data,
                              read_blast_output(filename))
 }
+
 ```
 
 ```{r read-in-metadata-and-join}
@@ -134,7 +158,32 @@ joined_blast_data_metadata %>%
        xlab = "Percent")
 ```
 
-Don't forget to report what your figures show in words, here in the Results section.
+
+
+
+``` {Figures Created by me}
+
+# These are all of the figures created by me for the assignment. They focus on percent identity match across sexes (male, female and not applicable). 
+joined_blast_data_metadata %>%
+  filter(sex_s == "female") %>%
+  pull(pident) %>%
+  hist(main = "Percent Identity in Females",
+       xlab = "Percent Match")
+       
+joined_blast_data_metadata %>%
+  filter(sex_s == "male") %>%
+  pull(pident) %>%
+  hist(main = "Percent Identity in Males",
+       xlab = "Percent Match")
+       
+joined_blast_data_metadata %>%
+  filter(sex_s == "Not applicable") %>%
+  pull(pident) %>%
+  hist(main = "Percent Identity in Non-Applicable Gender",
+       xlab = "Percent Match")
+
+```
+
 
 ```{r summary-table}
 # Finally, we'd like to be able to make a summary table of the counts of
@@ -144,6 +193,8 @@ Don't forget to report what your figures show in words, here in the Results sect
 kable(table(joined_blast_data_metadata$sscinames,
             joined_blast_data_metadata$Run_s))
 ```
+
+
 
 # Discussion
 
